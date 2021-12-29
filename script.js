@@ -1,12 +1,12 @@
 const word = document.getElementById('word');
 const wrongLetters = document.getElementById('wrong-letters');
-const playAgain = document.getElementById('play-button');
+const playButton = document.getElementById('play-button');
 const popupContainer = document.getElementById('popup-container');
 const notificationContainer = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 const finalMessageRevealWord = document.getElementById('final-message-reveal-word');
 const figurePart = document.querySelectorAll('.figure-part');
-const wordArray = ('application','programming','interface','wizard');
+const wordArray = ['application','programming','interface','wizard'];
 let selectedWord = wordArray[Math.floor(Math.random() * wordArray.length)];
 let playable = true;
 const correctLettersArray = [];
@@ -14,7 +14,7 @@ const wrongLettersArray = [];
 function displayWord(){
      word.innerHTML = `
           ${selectedWord.split("").map(letter => `
-               <span class="letter">${correctLettersArray.includes(letter) ? letter : ''}</span>
+               <span class="letter">${correctLettersArray.includes(letter) ? letter : ""}</span>
           `).join("")}
      `;
      const innerWord = word.innerText.replace(/[\n]/g,"");
@@ -32,7 +32,7 @@ function updateWrongLetters(){
           ${wrongLettersArray.map(letter => `<span>${letter}</span>`)}
      `;
      figurePart.forEach((part,index) => {
-          const errors = wrongLetters.length;
+          const errors = wrongLettersArray.length;
           if(index > errors){
                part.style.display = 'block';
           }else{
@@ -74,7 +74,7 @@ window.addEventListener('keydown',event => {
           }
      }
 });
-playAgain.addEventListener('click',() => {
+playButton.addEventListener('click',() => {
      playable = true;
      correctLettersArray.splice(0);
      wrongLettersArray.splice(0);
